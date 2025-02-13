@@ -11,7 +11,7 @@ const projects = [
     {
         title: 'NextJs Tutorial',
         description: 'Nextjs tutorial.',
-        image: '/nextjs.png',
+        image: '/nextjs.PNG',
         technologies: ['NextJs', 'Typescript'],
     },
 ]
