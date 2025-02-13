@@ -48,6 +48,7 @@ const AnimatedBackground = () => {
             }
 
             draw() {
+                if (!ctx) return; // Ensure ctx is not null
                 ctx.fillStyle = 'rgba(200, 200, 255, 0.5)';
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
@@ -64,6 +65,7 @@ const AnimatedBackground = () => {
         };
 
         const animate = () => {
+            if (!ctx) return; // Ensure ctx is not null
             ctx.clearRect(0, 0, canvasWidth, canvasHeight);
             particles.forEach((particle) => {
                 particle.update();
