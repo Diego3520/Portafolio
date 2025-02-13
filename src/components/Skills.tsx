@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs, FaGitAlt } from 'react-icons/fa'
+import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaGitAlt } from 'react-icons/fa'
 import { SiTypescript, SiNextdotjs, SiTailwindcss, SiPython, SiElectron  } from 'react-icons/si'
 
 const skills = [

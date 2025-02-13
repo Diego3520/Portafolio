@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion'
+import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 const experiences = [
     {
@@ -8,7 +9,7 @@ const experiences = [
         description: 'Work in training for web development.',
         logo: '/boring.png',
     },
-]
+];
 
 const Experience = () => {
     return (
@@ -25,12 +26,12 @@ const Experience = () => {
                         transition={{ duration: 0.5, delay: index * 0.1 }}
                         className="mb-8 flex items-center"
                     >
-                        <img
-                            src="/boring.png"
+                        <Image
+                            src={exp.logo}
                             alt={exp.company}
                             width={60}
                             height={60}
-                            className=" mr-4 rounded-full object-cover"
+                            className="mr-4 rounded-full object-cover"
                         />
                         <div>
                             <h3 className="text-xl font-semibold mb-2 text-gray-800 dark:text-white">{exp.position}</h3>
@@ -42,7 +43,7 @@ const Experience = () => {
                 ))}
             </div>
         </section>
-    )
-}
+    );
+};
 
-export default Experience
+export default Experience;
