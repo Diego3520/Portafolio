@@ -10,7 +10,6 @@ import Experience from '@/components/Experience';
 import Education from '@/components/Education';
 import Skills from '@/components/Skills';
 import Projects from '@/components/Projects';
-import AnimatedBackground from '@/components/AnimatedBackground';
 
 export default function Home() {
     const [mounted, setMounted] = useState(false);
@@ -24,7 +23,7 @@ export default function Home() {
     return (
         <ThemeProvider attribute="class">
             <div className="min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
-                <AnimatedBackground/>
+
 
                 <main className="container mx-auto px-4 py-8">
                     <Hero/>
