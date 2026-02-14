@@ -1,15 +1,15 @@
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-
-const experiences = [
-    {
-        company: 'Boring Ventures.',
-        position: 'Internal Developer',
-        period: 'Present',
-        description: 'Work in training for web development.',
-        logo: '/boring.png',
-    },
-];
+// Añadir experiencias laborales
+// import { motion } from 'framer-motion';
+// import Image from 'next/image';
+// const experiences = [
+//     {
+//         company: 'Lugar de trabajo',
+//         position: 'Puesto',
+//         period: 'Periodo de trabajo',
+//         description: 'Descripción de las responsabilidades y logros en ese puesto.',
+//         logo: 'icono o logo de la empresa (opcional)',
+//     },
+// ];
 
 const Experience = () => {
     return (
@@ -17,7 +17,9 @@ const Experience = () => {
             <h2 className="text-3xl font-bold mb-8 text-center text-gray-800 dark:text-white">
                 Work Experience
             </h2>
-            <div className="max-w-3xl mx-auto">
+            <div className="max-w-3xl mx-auto text-center">
+                <p className="text-lg text-gray-600 dark:text-gray-400">Aún en desarrollo</p>
+                {/* Descomentar y usar cuando se agreguen experiencias:
                 {experiences.map((exp, index) => (
                     <motion.div
                         key={index}
@@ -41,6 +43,7 @@ const Experience = () => {
                         </div>
                     </motion.div>
                 ))}
+                */}
             </div>
         </section>
     );

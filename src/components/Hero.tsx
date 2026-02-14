@@ -31,16 +31,14 @@ const Hero = () => {
                     Specialized in web development, scalable applications and performance optimization.
                 </p>
 
-                <motion.a
+                <a
                     href="https://www.linkedin.com/in/diego-espinoza-lucero-779231346/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="bg-blue-500 text-white px-6 py-3 rounded-full font-semibold shadow-md hover:bg-blue-600 transition"
+                    className="bg-blue-500 text-white px-6 py-3 rounded-full font-semibold shadow-md hover:bg-blue-600 transition hover:scale-105 active:scale-95 inline-block"
                 >
                     Get in touch
-                </motion.a>
+                </a>
             </motion.div>
         </section>
     );

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
-import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaGitAlt } from 'react-icons/fa'
-import { SiTypescript, SiNextdotjs, SiTailwindcss, SiPython, SiElectron  } from 'react-icons/si'
+import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaGitAlt, FaDocker } from 'react-icons/fa'
+import { SiTypescript, SiNextdotjs, SiTailwindcss, SiPython, SiElectron, SiGithubactions, SiExpress, SiGooglecloud } from 'react-icons/si'
+import { TbBrandAzure } from 'react-icons/tb'
 
 const skills = [
     { name: 'HTML5', icon: FaHtml5 },
@@ -9,10 +10,15 @@ const skills = [
     { name: 'TypeScript', icon: SiTypescript },
     { name: 'React', icon: FaReact },
     { name: 'Next.js', icon: SiNextdotjs },
-    { name: 'Electron', icon: SiElectron  },
+    { name: 'Electron', icon: SiElectron },
+    { name: 'Express.js', icon: SiExpress },
     { name: 'Tailwind CSS', icon: SiTailwindcss },
     { name: 'Git', icon: FaGitAlt },
     { name: 'Python', icon: SiPython },
+    { name: 'Docker', icon: FaDocker },
+    { name: 'GitHub Actions', icon: SiGithubactions },
+    { name: 'Google Cloud', icon: SiGooglecloud },
+    { name: 'Azure', icon: TbBrandAzure },
 ]
 
 const Skills = () => {

@@ -1,10 +1,23 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { useTheme } from 'next-themes';
+
+interface Particle {
+    x: number;
+    y: number;
+    size: number;
+    speedX: number;
+    speedY: number;
+    opacity: number;
+    update: (width: number, height: number) => void;
+    draw: (ctx: CanvasRenderingContext2D) => void;
+}
 
 const AnimatedBackground = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const animationRef = useRef<number | null>(null);
+    const { theme } = useTheme();
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -13,84 +26,99 @@ const AnimatedBackground = () => {
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
         let particles: Particle[] = [];
-        const particleCount = 100;
-        const canvasWidth = canvas.width;
-        const canvasHeight = canvas.height;
+        const particleCount = 80;
 
-        class Particle {
-            x: number;
-            y: number;
-            size: number;
-            speedX: number;
-            speedY: number;
+        const setCanvasSize = () => {
+            if (!canvas) return;
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        };
 
-            constructor() {
-                this.x = Math.random() * canvasWidth;
-                this.y = Math.random() * canvasHeight;
-                this.size = Math.random() * 5 + 1;
-                this.speedX = Math.random() * 3 - 1.5;
-                this.speedY = Math.random() * 3 - 1.5;
-            }
+        setCanvasSize();
 
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
+        const createParticle = (width: number, height: number): Particle => {
+            return {
+                x: Math.random() * width,
+                y: Math.random() * height,
+                size: Math.random() * 2.5 + 0.5,
+                speedX: Math.random() * 1.5 - 0.75,
+                speedY: Math.random() * 1.5 - 0.75,
+                opacity: Math.random() * 0.5 + 0.3,
 
-                if (this.x > canvasWidth) this.x = 0;
-                else if (this.x < 0) this.x = canvasWidth;
+                update(width: number, height: number) {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
 
-                if (this.y > canvasHeight) this.y = 0;
-                else if (this.y < 0) this.y = canvasHeight;
-            }
+                    if (this.x > width) this.x = 0;
+                    else if (this.x < 0) this.x = width;
 
-            draw() {
-                if (!ctx) return; // Ensure ctx is not null
-                ctx.fillStyle = 'rgba(200, 200, 255, 0.5)';
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.closePath();
-                ctx.fill();
-            }
-        }
+                    if (this.y > height) this.y = 0;
+                    else if (this.y < 0) this.y = height;
+                },
+
+                draw(ctx: CanvasRenderingContext2D) {
+                    const isDark = theme === 'dark';
+                    ctx.fillStyle = isDark
+                        ? `rgba(147, 197, 253, ${this.opacity})`
+                        : `rgba(59, 130, 246, ${this.opacity})`;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            };
+        };
 
         const init = () => {
+            if (!canvas) return;
             particles = [];
             for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
+                particles.push(createParticle(canvas.width, canvas.height));
             }
         };
 
         const animate = () => {
-            if (!ctx) return; // Ensure ctx is not null
-            ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+            if (!ctx || !canvas) return;
+
+            // Fondo según el tema
+            const isDark = theme === 'dark';
+            ctx.fillStyle = isDark ? '#111827' : '#f3f4f6';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Dibujar partículas
             particles.forEach((particle) => {
-                particle.update();
-                particle.draw();
+                particle.update(canvas.width, canvas.height);
+                particle.draw(ctx);
             });
+
             animationRef.current = requestAnimationFrame(animate);
         };
 
         const handleResize = () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+            setCanvasSize();
             init();
         };
 
         init();
         animate();
+
         window.addEventListener('resize', handleResize);
 
         return () => {
-            if (animationRef.current) cancelAnimationFrame(animationRef.current);
+            if (animationRef.current) {
+                cancelAnimationFrame(animationRef.current);
+            }
             window.removeEventListener('resize', handleResize);
         };
-    }, []);
+    }, [theme]);
 
-    return <canvas ref={canvasRef} className="fixed top-0 left-0 w-full h-full" />;
+    return (
+        <canvas
+            ref={canvasRef}
+            className="fixed inset-0 pointer-events-none"
+            style={{ zIndex: 0 }}
+        />
+    );
 };
 
 export default AnimatedBackground;
